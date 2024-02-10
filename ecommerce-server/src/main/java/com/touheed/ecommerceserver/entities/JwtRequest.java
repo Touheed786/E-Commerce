@@ -3,7 +3,7 @@ package com.touheed.ecommerceserver.entities;
 public class JwtRequest {
 	
 	private String userName;
-	private String Password;
+	private String password;
 
 	public String getUserName() {
 		return userName;
@@ -12,10 +12,10 @@ public class JwtRequest {
 		this.userName = userName;
 	}
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 	
 	

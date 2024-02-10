@@ -29,11 +29,7 @@ public class UserService {
 	
 	public User RegisterUser(User user) throws Exception
 	{
-//		Role role = roleDao.findByRoleName("User");
 		Role role = roleDao.findById("User").get();
-//		Role role = new Role();
-//		role.setRoleName("User");
-//		role.setRoleDescription("This is for User Role Only");
 		System.out.println(role.getRoleName());
 		
 		Set<Role> roles = new HashSet<>();
@@ -72,18 +68,18 @@ public class UserService {
 		userDao.save(adminUser);
 		
 		
-//		User user = new User();
-//		
-//		user.setUserName("touheed");
-//		user.setFirstName("Touheed");
-//		user.setLastName("Sab");
-//		user.setPassword(getEncodedPassword("123456"));
-//		
-//		Set<Role> userRoles = new HashSet<>();
-//		userRoles.add(userRole);
-//		user.setRoles(userRoles);
-//		
-//		userDao.save(user);
+		User user = new User();
+		
+		user.setUserName("touheed");
+		user.setFirstName("Touheed");
+		user.setLastName("Sab");
+		user.setPassword(getEncodedPassword("123456"));
+		
+		Set<Role> userRoles = new HashSet<>();
+		userRoles.add(userRole);
+		user.setRoles(userRoles);
+		
+		userDao.save(user);
 	}
 	
 	public String getEncodedPassword(String password)

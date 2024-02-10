@@ -5,6 +5,7 @@ import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { authGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -13,18 +14,22 @@ const routes: Routes = [
   },
   {
     path:"admin",
-    component:AdminComponent
+    component:AdminComponent,
+    canActivate:[authGuard],
+    data:{roles:['Admin']}
   },
   {
     path:"user",
-    component:UserComponent
+    component:UserComponent,
+    canActivate:[authGuard],
+    data:{roles:['User']}
   },
   {
     path:"login",
     component:LoginComponent
   },
   {
-    path:"fotbidden",
+    path:"forbidden",
     component:ForbiddenComponent
   }
 ];

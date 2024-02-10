@@ -74,7 +74,7 @@ public class WebSecurityConfiguration {
 		.cors(cors -> cors.disable())
 				.authorizeHttpRequests(authorizeRequests -> authorizeRequests
 						.requestMatchers("/authenticate","/user/create").permitAll()
-//					    .requestMatchers(HttpHeaders.ALLOW).permitAll()
+					    .requestMatchers(HttpHeaders.ALLOW).permitAll()
 						.anyRequest().authenticated())
 				.exceptionHandling(
 						exceptionHandling -> exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint))
