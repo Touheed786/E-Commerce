@@ -12,16 +12,22 @@ export class UserComponent {
   constructor(private userService:UserService){}
 
   ngOnInit(){
-    this.forUser()
+    // this.forUser()
   }
 
   public forUser()
   {
     this.userService.forUser().subscribe((data:any)=>{
-      console.log(data)
+      console.log("User data",data)
       this.message = data;
     },(error)=>{
       console.log(error)
+    })
+  }
+
+  forTest(){
+    this.userService.forTest().subscribe((data:any)=>{
+      console.log(data)
     })
   }
 

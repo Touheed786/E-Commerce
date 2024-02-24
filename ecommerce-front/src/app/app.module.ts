@@ -32,12 +32,12 @@ import { UserService } from './services/user.service';
     RouterModule
   ],
   providers: [
-    {
+    UserService,
+    [{
       provide:HTTP_INTERCEPTORS,
       useClass:AuthInterceptor,
       multi:true
-    },
-    UserService
+    }],
   ],
   bootstrap: [AppComponent]
 })

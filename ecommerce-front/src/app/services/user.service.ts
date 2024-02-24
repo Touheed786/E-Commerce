@@ -22,12 +22,22 @@ export class UserService {
 
   public forUser()
   {
-    return this.http.get(`${PATH_OF_API}/user/forUser`);
+    return this.http.get(`${PATH_OF_API}/user/forUser`,{
+      responseType: 'text',
+    });
   }
 
   public forAdmin()
   {
-    return this.http.get(`${PATH_OF_API}/user/forAdmin`);
+    return this.http.get(`${PATH_OF_API}/user/forAdmin`,{
+      responseType: 'text',
+    });
+  }
+  public forTest()
+  {
+    return this.http.get(`${PATH_OF_API}/user/test`,{
+      responseType: 'text',
+    });
   }
 
   public roleMatch(allowedRole:any):boolean 

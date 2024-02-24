@@ -9,7 +9,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const userAuth = inject(UserAuthService);
   const userService = inject(UserService);
 
-  if(userAuth.getToken !== null){
+  if(userAuth.getToken() !== null){
     const role = route.data["roles"] as Array<String>;
     if(role)
     {

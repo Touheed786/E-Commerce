@@ -71,10 +71,13 @@ public class WebSecurityConfiguration {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
-		.cors(cors -> cors.disable())
+		.cors(Customizer.withDefaults())
+//		.cors(cors -> cors.disable()) //this is giving cors error
 				.authorizeHttpRequests(authorizeRequests -> authorizeRequests
+//						.requestMatchers("/authenticate","/user/create","/user/forUser").permitAll()
 						.requestMatchers("/authenticate","/user/create").permitAll()
-					    .requestMatchers(HttpHeaders.ALLOW).permitAll()
+
+						.requestMatchers(HttpHeaders.ALLOW).permitAll()
 						.anyRequest().authenticated())
 				.exceptionHandling(
 						exceptionHandling -> exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint))
@@ -87,6 +90,8 @@ public class WebSecurityConfiguration {
 		
 		return build;
 	}
+	
+	
 	 
 	@Bean
 	 public BCryptPasswordEncoder passwordEncoder() {

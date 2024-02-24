@@ -32,8 +32,8 @@ public class UserController {
 		return userService.RegisterUser(user);
 	}
 	
+	@PreAuthorize("hasAnyRole('Admin')")
 	@GetMapping("/forAdmin")
-	@PreAuthorize("hasRole('Admin')")
 	public String forAdmin()
 	{
 		 return "This URL is only accessible for Admin";
@@ -44,5 +44,11 @@ public class UserController {
 	public String forUser()
 	{
 		 return "This URL is only accessible for User";
+	}
+	
+	@GetMapping("/test")
+	public String forTest()
+	{
+		 return "Working Fine...";
 	}
 }
