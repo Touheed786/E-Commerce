@@ -12,6 +12,7 @@ export class AdminComponent {
 
   message:string;
   ngOnInit(){
+    this.forAdmin()
   }
 
   forAdmin(){

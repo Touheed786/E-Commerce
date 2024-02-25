@@ -62,5 +62,26 @@ export class UserService {
     }
     return isMatch;
 
-  }
+  }  
+   public isAdmin(){
+    const role:any = JSON.parse(this.userAuth.getRoles());
+    if(role != null){
+      
+      console.log("this is the role",role)
+      console.log(role[0].roleName)
+      return role[0].roleName == "Admin";
+    }
+    return false;
+   }
+
+   public isUser(){
+    
+    const role:any[] = JSON.parse(this.userAuth.getRoles());
+    if(role != null){
+
+      console.log(role[0].roleName)
+      return role[0].roleName == "User";
+    }
+    return false;
+   }
 }

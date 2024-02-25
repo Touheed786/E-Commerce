@@ -9,20 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.touheed.ecommerceserver.dao.RoleDao;
-import com.touheed.ecommerceserver.dao.UserDao;
 import com.touheed.ecommerceserver.entities.Role;
 import com.touheed.ecommerceserver.entities.User;
+import com.touheed.ecommerceserver.repository.RoleRepository;
+import com.touheed.ecommerceserver.repository.UserRepository;
 
 @Service
 public class UserService {
 	
 
 	@Autowired
-	private UserDao userDao;
+	private UserRepository userDao;
 	
 	@Autowired
-	private RoleDao roleDao;
+	private RoleRepository roleDao;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;

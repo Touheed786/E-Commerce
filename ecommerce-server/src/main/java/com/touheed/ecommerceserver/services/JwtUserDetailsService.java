@@ -15,17 +15,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.touheed.ecommerceserver.configuration.JwtUtil;
-import com.touheed.ecommerceserver.dao.UserDao;
 import com.touheed.ecommerceserver.entities.JwtRequest;
 import com.touheed.ecommerceserver.entities.JwtResponse;
 import com.touheed.ecommerceserver.entities.User;
+import com.touheed.ecommerceserver.repository.UserRepository;
 
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService{
 	
 	@Autowired
-	private UserDao userDao;
+	private UserRepository userDao;
 	
 	@Autowired
 	private JwtUtil jwtUtil;

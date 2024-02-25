@@ -12,7 +12,7 @@ export class UserComponent {
   constructor(private userService:UserService){}
 
   ngOnInit(){
-    // this.forUser()
+    this.forUser()
   }
 
   public forUser()

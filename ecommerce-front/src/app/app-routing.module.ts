@@ -6,10 +6,11 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { authGuard } from './auth/auth.guard';
+import { AddProductComponent } from './add-product/add-product.component';
 
 const routes: Routes = [
   {
-    path:"home",
+    path:"",
     component:HomeComponent
   },
   {
@@ -31,7 +32,12 @@ const routes: Routes = [
   {
     path:"forbidden",
     component:ForbiddenComponent
+  },
+  {
+    path:"addProduct",
+    component:AddProductComponent
   }
+
 ];
 
 @NgModule({

@@ -20,7 +20,7 @@ export class HeaderComponent {
   public logout()
   {
     this.userAuth.clear();
-    this.router.navigate(['/home'])
+    this.router.navigate(['/'])
   }
 
 }
