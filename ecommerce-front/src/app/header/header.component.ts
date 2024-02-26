@@ -10,7 +10,7 @@ import { UserService } from '../services/user.service';
 })
 export class HeaderComponent {
 
-  constructor(private userAuth:UserAuthService,private router:Router,public userService:UserService){}
+  constructor(public userAuth:UserAuthService,private router:Router,public userService:UserService){}
 
   public isLoggedIn()
   {

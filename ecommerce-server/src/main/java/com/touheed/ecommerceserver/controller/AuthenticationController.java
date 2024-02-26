@@ -1,5 +1,6 @@
 package com.touheed.ecommerceserver.controller;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,5 +38,11 @@ public class AuthenticationController {
 	public JwtResponse createJwtToken(@RequestBody JwtRequest jwtRequest) throws Exception
 	{
 		return jwtUserDetailsService.createJwtToken(jwtRequest);
+	}
+	
+	@GetMapping("/current-user")
+	public String getCurrentUSer(Principal principal)
+	{
+		return principal.getName();
 	}
 }

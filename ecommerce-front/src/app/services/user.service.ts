@@ -66,9 +66,6 @@ export class UserService {
    public isAdmin(){
     const role:any = JSON.parse(this.userAuth.getRoles());
     if(role != null){
-      
-      console.log("this is the role",role)
-      console.log(role[0].roleName)
       return role[0].roleName == "Admin";
     }
     return false;
@@ -78,8 +75,6 @@ export class UserService {
     
     const role:any[] = JSON.parse(this.userAuth.getRoles());
     if(role != null){
-
-      console.log(role[0].roleName)
       return role[0].roleName == "User";
     }
     return false;

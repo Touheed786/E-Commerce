@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">E-Commerce</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,4 +26,33 @@
   <mat-toolbar class="navbar-dark bg-primary" *ngIf="userService.isAdmin() || userService.isUser()">
     <button mat-raised-button class="bg-primary" [routerLink]="['/']">Home</button>
     <button *ngIf="userService.isAdmin()" mat-raised-button class="navbar-dark bg-primary" [routerLink]="['/addProduct']">Add Product</button>
+  </mat-toolbar> -->
+
+  <mat-toolbar class="navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">E-Commerce</a>
+    <span class="spacer"></span>
+    <button class="btn btn-success" [routerLink]="['/login']" *ngIf="!isLoggedIn()">Login</button>
+    <button class="btn btn-danger" *ngIf="isLoggedIn()" (click)="logout()">Logout</button> 
   </mat-toolbar>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary" *ngIf="userAuth.isLoggedIn()">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <button mat-raised-button class="bg-primary" [routerLink]="['/']">Home</button>
+          </li>
+          <li class="nav-item" *ngIf="userService.isAdmin()">
+            <button mat-raised-button class="navbar-dark bg-primary" [routerLink]="['/addProduct']">Add Product</button>
+        </li>
+          <li class="nav-item" *ngIf="userService.isUser()">
+            <a class="nav-link active" aria-current="page" [routerLink]="['/user']">User Dashboard</a>
+          </li>
+         
+        </ul>
+      </div>
+    </div>
+  </nav>

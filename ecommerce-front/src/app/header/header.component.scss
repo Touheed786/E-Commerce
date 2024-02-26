@@ -1,3 +1,19 @@
 button{
     margin-right: 5px;
+    padding-top: 7px;
+}
+
+.spacer {
+    flex: 1;
+  }
+  
+
+  @media (max-width: 995px) {
+    li{
+        padding-top: 7px;
+    }
+  }
+
+.navbar{
+margin: -1px;
 }
