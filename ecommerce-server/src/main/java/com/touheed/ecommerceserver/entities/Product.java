@@ -20,8 +20,8 @@ public class Product {
 	private Integer productId;
 	private String productName;
 	private String productDescription;
-	private Double productDiscountedPrice;
-	private Double actaulPrice;
+	private String productDiscountedPrice;
+	private String actaulPrice;
 	
 	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinTable(name = "product_images",
@@ -51,16 +51,16 @@ public class Product {
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
 	}
-	public Double getProductDiscountedPrice() {
+	public String getProductDiscountedPrice() {
 		return productDiscountedPrice;
 	}
-	public void setProductDiscountedPrice(Double productDiscountedPrice) {
+	public void setProductDiscountedPrice(String productDiscountedPrice) {
 		this.productDiscountedPrice = productDiscountedPrice;
 	}
-	public Double getActaulPrice() {
+	public String getActaulPrice() {
 		return actaulPrice;
 	}
-	public void setActaulPrice(Double actaulPrice) {
+	public void setActaulPrice(String actaulPrice) {
 		this.actaulPrice = actaulPrice;
 	}
 	public Set<ImageModel> getProductImages() {

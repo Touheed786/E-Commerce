@@ -16,9 +16,23 @@ export class AddProductComponent {
 
   ProductData:Product = new Product;
   isImageEmpty:boolean;
+   Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+
+  
   
   
   ngOnInit(){
+   
     this.ProductData.productImages = [];
   }
 
@@ -38,10 +52,15 @@ export class AddProductComponent {
       });
       // this.clear()
       console.log(data)
+      this.clear()
     },(err)=>{
+      this.Toast.fire({
+        icon: "error",
+        title: err.error
+      });
       console.log(err)
     })
-    this.clear()
+   
   }
 
   prepareFormData(product:Product):FormData{

@@ -31,7 +31,7 @@ export class AuthInterceptor implements HttpInterceptor{
                 this.router.navigate(['/forbidden'])
             }
             // Propagate the error to the consumer of the observable
-            return throwError("Something is Wrong");
+            return throwError(error);
           })
        );
     }
