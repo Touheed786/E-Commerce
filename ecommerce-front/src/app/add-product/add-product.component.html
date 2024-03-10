@@ -25,9 +25,35 @@
                     <button mat-raised-button class="navbar-dark bg-primary" (click)="addProduct()">Add Product</button>
                 </div>
             </div>
-            <div class="col-6">
-                <input type="file" multiple value="select" #selectFile
-                (change)="onFileSelected($event)" required>
+            <div [ngClass]="{'is-image-empty': isImageEmpty}" class="col-6">
+                <div>
+
+                    <div class="dropzone" appDrag
+                    (files)="fileDropped($event)"
+                    >
+                        <div class="text-wrapper">
+                            Drag and Drop your file or <a (click)="selectFile.click()">browse</a> a file
+                        </div>
+                    </div>
+
+                    <input type="file" multiple value="select" #selectFile
+                    (change)="onFileSelected($event)" required>
+                </div>
+
+                <div class="mt-5">
+                    <div class="row">
+                        <mat-grid-list cols="4" rowHeight="1:1">
+                            <mat-grid-tile *ngFor="let file of ProductData.productImages;let i = index">
+                                <span class="btn-remove-image"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="cancel" (click)="removeImage(i)"></mat-icon></span>
+                                <div style="position: absolute;">
+                                    <img [src]="file.url" width="100px" height="100px" alt="" srcset="">
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </div>
+                    
+                </div>
+                
             </div>
         </div>
     </div>

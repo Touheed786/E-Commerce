@@ -15,6 +15,7 @@ export class AddProductComponent {
   constructor(private productService:ProductService,private sanitizer:DomSanitizer){}
 
   ProductData:Product = new Product;
+  isImageEmpty:boolean;
   
   
   ngOnInit(){
@@ -25,6 +26,7 @@ export class AddProductComponent {
   addProduct(){
     if(this.ProductData.productImages.length == 0)
     {
+      this.isImageEmpty = true;
       return;
     }
     const productFormData = this.prepareFormData(this.ProductData);
@@ -39,6 +41,7 @@ export class AddProductComponent {
     },(err)=>{
       console.log(err)
     })
+    this.clear()
   }
 
   prepareFormData(product:Product):FormData{
@@ -55,18 +58,22 @@ export class AddProductComponent {
         product.productImages[i].file.name
       );
     }
+    
     return formData;
   }
 
   clear()
   {
     this.ProductData = new Product
+    this.ProductData.productImages = []
+    this.isImageEmpty = false;
   }
 
   onFileSelected(event:any)
   {
     if(event.target.files)
     {
+      this.isImageEmpty = false;
       const file = event.target.files[0];
       const fileHandle:FileHandle = {
         file:file,
@@ -77,6 +84,16 @@ export class AddProductComponent {
       this.ProductData.productImages.push(fileHandle)
       console.log(this.ProductData.productImages)
     }
+  }
+
+  removeImage(id:number){
+    this.ProductData.productImages.splice(id,1)
+  }
+
+  fileDropped(fileHandle:FileHandle)
+  {
+    this.ProductData.productImages.push(fileHandle);
+    this.isImageEmpty = false;
   }
 
 }
