@@ -3,6 +3,7 @@ package com.touheed.ecommerceserver.entities;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +20,7 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer productId;
 	private String productName;
+	@Column(length = 500)
 	private String productDescription;
 	private String productDiscountedPrice;
 	private String actaulPrice;

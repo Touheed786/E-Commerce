@@ -1,7 +1,9 @@
 package com.touheed.ecommerceserver.services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.touheed.ecommerceserver.entities.ImageModel;
 import com.touheed.ecommerceserver.entities.Product;
-import com.touheed.ecommerceserver.exception.InvalidPriceException;
+import com.touheed.ecommerceserver.exception.ServerException;
 import com.touheed.ecommerceserver.repository.ProductRepository;
 
 @Service
@@ -22,20 +24,20 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productRepository;
 	
-	public ResponseEntity<Product> addNewProduct(Product product) throws InvalidPriceException
+	public ResponseEntity<Product> addNewProduct(Product product) throws ServerException
 	{
 		
 		if(product.getActaulPrice() != null && product.getActaulPrice().trim() != "")
 		{
 			if(!isValidPrice(product.getActaulPrice())) {
-				throw new InvalidPriceException("Enter Proper Actual Price");
+				throw new ServerException("Enter Proper Actual Price");
 			}
 		}
 		
 		if(product.getProductDiscountedPrice() != null && product.getProductDiscountedPrice().trim() != "")
 		{
 			if(!isValidPrice(product.getProductDiscountedPrice())) {
-				throw new InvalidPriceException("Enter Proper Discounted Price");
+				throw new ServerException("Enter Properx Discounted Price");
 			}
 		}
 		
@@ -53,13 +55,33 @@ public class ProductService {
 		return imageModels;
 	}
 	
-	 public boolean isValidPrice(String price) {
-//	        return price.matches("^[-+]?\\d{1,3}(,\\d{3})*(\\.\\d+)?$");
-		 try {
-		        Double.parseDouble(price);
-		        return true;
-		    } catch (NumberFormatException e) {
-		        return false;
-		    }
-	    }
+	public boolean isValidPrice(String price) {
+
+		String pattern = "1234567890,. ";
+		for (int i = 0; i < price.length(); i++) {
+			if (pattern.indexOf(price.charAt(i)) == -1) {
+				return false;
+			}
+		}
+		return true;
+	}
+	 
+	 public List<Product> getAllProducts()
+	 {
+		 return productRepository.findAll();
+	 }
+	 
+	 public int deleteProduct(Integer productId) throws ServerException {
+		 List<Product> products = productRepository.findAll();
+		 if(products != null) {
+			 for(Product singleProd:products) {
+				 if(singleProd.getProductId() == productId) {
+					 Product product = productRepository.findById(productId).get();
+					 productRepository.delete(product);
+					 return product.getProductId();
+				 }
+			 }
+		 }
+		 throw new ServerException("Product is not Exists");
+	 }
 }

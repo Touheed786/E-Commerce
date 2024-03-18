@@ -24,6 +24,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { DragDirective } from './drag.directive';
+import { ShowProductDetailsComponent } from './show-product-details/show-product-details.component';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import { DragDirective } from './drag.directive';
     HeaderComponent,
     ForbiddenComponent,
     AddProductComponent,
-    DragDirective
+    DragDirective,
+    ShowProductDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { DragDirective } from './drag.directive';
     MatFormFieldModule,
     MatInputModule,
     MatDividerModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTableModule
     
   ],
   providers: [

@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { authGuard } from './auth/auth.guard';
 import { AddProductComponent } from './add-product/add-product.component';
+import { ShowProductDetailsComponent } from './show-product-details/show-product-details.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,12 @@ const routes: Routes = [
   {
     path:"addProduct",
     component:AddProductComponent,
+    canActivate:[authGuard],
+    data:{roles:['Admin']},
+  },
+  {
+    path:"productdetails",
+    component:ShowProductDetailsComponent,
     canActivate:[authGuard],
     data:{roles:['Admin']},
   }
