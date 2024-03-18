@@ -1,0 +1,22 @@
+.mat-mdc-table {
+    width: 100%;
+    max-height: 600px;
+    overflow: auto;
+  }
+
+  .mat-header-row{
+    position: sticky;
+    top: 0;
+  }
+
+  ::-webkit-scrollbar {
+    width: 30px;
+}
+
+.actionCard{
+    height: 38px;
+}
+
+input[type=checkbox] {
+    margin: 3px;
+}
