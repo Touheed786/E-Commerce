@@ -57,8 +57,8 @@ public class ProductController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public int deleteProduct(@PathVariable("id") Integer id) throws ServerException {
-		return productService.deleteProduct(id);
+	public ResponseEntity<Integer> deleteProduct(@PathVariable("id") Integer id) throws ServerException {
+		return ResponseEntity.ok(productService.deleteProduct(id));
 	}
 	
 	

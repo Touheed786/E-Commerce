@@ -1,9 +1,9 @@
-<div class="container mt-5">
+<!-- <div class="container mt-5">
     <div class="card actionCard">
 
     </div>
-</div>
-<div class="container">
+</div> -->
+<div class="container mt-5">
     <div class="mat-mdc-table">
     <table mat-table [dataSource]="ProductData" class="mat-elevation-z8">
 
@@ -40,3 +40,26 @@
     </div>
       
 </div>
+
+<!-- <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+            
+          <th scope="col" style="width: 5%">
+            <input type="checkbox" class="form-check-input" id="selectAll" (change)="toggleSelectAll($event)">
+            </th>
+          <th scope="col">Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let val of items;index">
+            <th scope="row">
+              <input type="checkbox" class="form-check-input" id="check1" #checkbox (change)="toggleChildCheckbox()">
+            </th>
+            <td>{{val}}</td>
+        </tr>
+         
+      </tbody>
+    </table>
+  </div> -->

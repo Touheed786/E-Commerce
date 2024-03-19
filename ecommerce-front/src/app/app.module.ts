@@ -28,6 +28,8 @@ import { ShowProductDetailsComponent } from './show-product-details/show-product
 import {MatTableModule} from '@angular/material/table';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +58,7 @@ import {MatTableModule} from '@angular/material/table';
     MatInputModule,
     MatDividerModule,
     MatGridListModule,
-    MatTableModule
+    MatTableModule,
     
   ],
   providers: [
