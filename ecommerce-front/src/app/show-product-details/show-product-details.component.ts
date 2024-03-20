@@ -1,7 +1,14 @@
 import { ChangeDetectorRef, Component, QueryList, ViewChildren } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product } from '../model/product.model';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
+
+interface Student {
+  id: number;
+  name: string;
+  age: number;
+  checked:boolean;
+}
 
 @Component({
   selector: 'app-show-product-details',
@@ -15,9 +22,27 @@ export class ShowProductDetailsComponent {
   @ViewChildren('checkbox') checkboxes: QueryList<HTMLInputElement>;
   
 
-  items = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
-  selectAllCheckboxState = false;
-  ProductData:any;
+  items = [
+    { id: 5, firstName: 'John', lastName: 'Doe', email: 'john@example.com', age: 30, address: '123 Main St', phone: '555-1234' },
+    { id: 9, firstName: 'Jane', lastName: 'Doe', email: 'jane@example.com', age: 28, address: '456 Elm St', phone: '555-5678' },
+    { id: 8, firstName: 'Jane', lastName: 'Doe', email: 'jane@example.com', age: 28, address: '456 Elm St', phone: '555-5678' }
+    // Add more items as needed
+  ];
+
+  students: Student[] = [
+    { id: 9, name: 'John', age: 20 ,checked: false},
+    { id: 7, name: 'Alice', age: 22 ,checked: false},
+    { id: 3, name: 'Bob', age: 21 ,checked: false}
+    // Add more students as needed
+  ];
+
+
+  headerSelected:boolean = false;
+  rowSelected:boolean = false;
+  headerCheckbox = false;
+  ProductData:any =[];
+  selectedItems: number[] = [];
+  selectedIds: number[] = [];
 
   displayedColumns: string[] = ['ID.', 'Name', 'Description', 'Discounted Price','Actual Price'];
   
@@ -37,32 +62,44 @@ export class ShowProductDetailsComponent {
     })
   }
 
-
-    toggleSelectAll(event: any) {
-      // const newState = event.target.checked;
-      // this.selectAllCheckboxState = newState;
-      // this.checkboxes.forEach((checkbox: HTMLInputElement) => {
-      //   checkbox.checked = newState;
-      // });
-      // this.updateChangeDetection()
-
-
-      const newState = event.target.checked;
-
-      const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
-    checkboxes.forEach((checkbox: any) => {
-      checkbox.checked = event.target.checked;
-    });
-    this.selectAllCheckboxState = newState;
+  selectAll(event: any) {
+    if (event.target.checked) {
+      this.rowSelected  = true;
+      // Select all students
+      this.selectedIds = this.ProductData.map((product: { productId: any; }) => product.productId);
+      console.log(this.selectedIds)
+    } else {
+      this.rowSelected  = false;
+      // Deselect all students
+      this.selectedIds = [];
+      console.log(this.selectedIds)
     }
+  }
 
-    toggleChildCheckbox() {
-      const allChecked = this.checkboxes.toArray().every((checkbox: HTMLInputElement) => checkbox.checked);
-      console.log(allChecked)
-      this.selectAllCheckboxState = allChecked;
+  toggleSelection(event: any, id: number) {
+    if (event.target.checked) {
+      // Add to selectedIds
+      this.selectedIds.push(id);
+    } else {
+      // Remove from selectedIds
+      this.selectedIds = this.selectedIds.filter(selectedId => selectedId !== id);
+      this.selectedIds.splice(id,1);
+      this.headerSelected = false;
     }
-    
-    updateChangeDetection() {
-      this.cdr.detectChanges();
+    if(this.ProductData.length === this.selectedIds.length){
+      this.headerSelected = true;
+    }else{
+      this.headerSelected = false;
+    }
+    console.log(this.selectedIds)
+  }
+
+
+  deleteAll(){
+    let param = new HttpParams;
+    param = param.append("includeIds",JSON.stringify(this.selectedIds));
+    // param = param.append("includeIds",this.selectedIds.toString());
+    console.log(this.selectedIds)
+    console.log("Params",param)
   }
 }

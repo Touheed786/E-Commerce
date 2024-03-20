@@ -1,9 +1,16 @@
-<!-- <div class="container mt-5">
-    <div class="card actionCard">
 
+<div class="container mt-5" >
+    <div class="card" style="height: 35px;">
+        <div *ngIf="selectedIds.length">
+            <i class="fas fa-trash-alt" (click)="deleteAll()"></i>
+        </div> 
+        <div *ngIf="!selectedIds.length">
+            <i class="fa-disabled fas fa-trash-alt"></i>
+        </div> 
     </div>
-</div> -->
-<div class="container mt-5">
+</div>
+
+<!-- <div class="container mt-5">
     <div class="mat-mdc-table">
     <table mat-table [dataSource]="ProductData" class="mat-elevation-z8">
 
@@ -39,27 +46,36 @@
     </table>
     </div>
       
-</div>
+</div> -->
 
-<!-- <div class="container">
+<div class="container">
     <table class="table">
       <thead>
         <tr>
             
           <th scope="col" style="width: 5%">
-            <input type="checkbox" class="form-check-input" id="selectAll" (change)="toggleSelectAll($event)">
+            <input type="checkbox" class="form-check-input" [checked]="headerSelected" (change)="selectAll($event)">
             </th>
-          <th scope="col">Name</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Discounted Price </th>
+            <th>Actual Price</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let val of items;index">
+        <tr *ngFor="let product of ProductData">
             <th scope="row">
-              <input type="checkbox" class="form-check-input" id="check1" #checkbox (change)="toggleChildCheckbox()">
+              <!-- <input type="checkbox" class="form-check-input" [checked]="isSelected(val.id)" id="check1" #checkbox (change)="toggleSelection($event, val.id)"> -->
+              <input type="checkbox" class="form-check-input"  id="check1" [checked]="rowSelected" (change)="toggleSelection($event, product.productId)">
             </th>
-            <td>{{val}}</td>
+            <td>{{ product.productId }}</td>
+            <td>{{ product.productName }}</td>
+            <td>{{ product.productDescription }}</td>
+            <td>{{ product.productDiscountedPrice }}</td>
+            <td>{{ product.actaulPrice }}</td>
         </tr>
          
       </tbody>
     </table>
-  </div> -->
+  </div>
