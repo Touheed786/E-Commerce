@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.touheed.ecommerceserver.entities.BulkDeleteResponse;
 import com.touheed.ecommerceserver.entities.ImageModel;
 import com.touheed.ecommerceserver.entities.Product;
 import com.touheed.ecommerceserver.exception.ServerException;
@@ -72,16 +73,25 @@ public class ProductService {
 	 }
 	 
 	 public int deleteProduct(Integer productId) throws ServerException {
-		 List<Product> products = productRepository.findAll();
-		 if(products != null) {
-			 for(Product singleProd:products) {
-				 if(singleProd.getProductId() == productId) {
+//		 List<Product> products = productRepository.findAll();
+//		 if(products != null) {
+//			 for(Product singleProd:products) {
+//				 if(singleProd.getProductId() == productId) {
 					 Product product = productRepository.findById(productId).get();
 					 productRepository.delete(product);
 					 return product.getProductId();
-				 }
-			 }
+//				 }
+//			 }
+//		 }
+//		 throw new ServerException("Product is not Exists");
+	 }
+	 
+	 public BulkDeleteResponse bulkDelete(List<Integer> selectedIds) throws ServerException {
+		 BulkDeleteResponse bulkDeleteResponse = new BulkDeleteResponse(new ArrayList<>());
+		 for(int id:selectedIds) {
+			 bulkDeleteResponse.getSuccessDeleted().add(id);
+			 deleteProduct(id);
 		 }
-		 throw new ServerException("Product is not Exists");
+		 return bulkDeleteResponse;
 	 }
 }

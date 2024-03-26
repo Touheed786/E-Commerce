@@ -17,34 +17,14 @@ interface Student {
 })
 export class ShowProductDetailsComponent {
 
-  constructor(private productService:ProductService,private cdr: ChangeDetectorRef){}
-
-  @ViewChildren('checkbox') checkboxes: QueryList<HTMLInputElement>;
-  
-
-  items = [
-    { id: 5, firstName: 'John', lastName: 'Doe', email: 'john@example.com', age: 30, address: '123 Main St', phone: '555-1234' },
-    { id: 9, firstName: 'Jane', lastName: 'Doe', email: 'jane@example.com', age: 28, address: '456 Elm St', phone: '555-5678' },
-    { id: 8, firstName: 'Jane', lastName: 'Doe', email: 'jane@example.com', age: 28, address: '456 Elm St', phone: '555-5678' }
-    // Add more items as needed
-  ];
-
-  students: Student[] = [
-    { id: 9, name: 'John', age: 20 ,checked: false},
-    { id: 7, name: 'Alice', age: 22 ,checked: false},
-    { id: 3, name: 'Bob', age: 21 ,checked: false}
-    // Add more students as needed
-  ];
-
+  constructor(private productService:ProductService){}
 
   headerSelected:boolean = false;
   rowSelected:boolean = false;
-  headerCheckbox = false;
   ProductData:any =[];
   selectedItems: number[] = [];
   selectedIds: number[] = [];
 
-  displayedColumns: string[] = ['ID.', 'Name', 'Description', 'Discounted Price','Actual Price'];
   
 
   ngOnInit(){
@@ -97,9 +77,14 @@ export class ShowProductDetailsComponent {
 
   deleteAll(){
     let param = new HttpParams;
-    param = param.append("includeIds",JSON.stringify(this.selectedIds));
-    // param = param.append("includeIds",this.selectedIds.toString());
-    console.log(this.selectedIds)
-    console.log("Params",param)
+    // param = param.append("includeIds",JSON.stringify(this.selectedIds));
+    param = param.append("includeIds",this.selectedIds.toString());
+    this.productService.bulkDelete(param).subscribe(data=>{
+      console.log(data)
+      this.getAllProducts();
+    },(err)=>{
+      console.log(err.error)
+    })
+    this.selectedIds = [];
   }
 }

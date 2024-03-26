@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.touheed.ecommerceserver.entities.BulkDeleteResponse;
 import com.touheed.ecommerceserver.entities.ImageModel;
 import com.touheed.ecommerceserver.entities.Product;
 import com.touheed.ecommerceserver.exception.ServerException;
@@ -64,9 +65,8 @@ public class ProductController {
 	}
 	
 	@PutMapping("/bulkDelete")
-	public List<Integer> bulkDelete(@RequestParam("includeIds") List<Integer> selectedIds){
-		System.out.println("selectedIds "+selectedIds);
-		return null;
+	public BulkDeleteResponse bulkDelete(@RequestParam("includeIds") List<Integer> selectedIds) throws ServerException{
+		return productService.bulkDelete(selectedIds);
 		
 	}
 	
